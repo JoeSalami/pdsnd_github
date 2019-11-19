@@ -80,9 +80,6 @@ def get_filters():
     print('-'*40)
     return city, month, day
 
-CITY_DATA = { 'chicago': 'chicago.csv',
-              'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
 
 def load_data(city, month, day):
     """
