@@ -15,61 +15,61 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    
+
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         try:
-            city = input('Please select a city to explore: (chicago, new york city, washington) \n').lower() 
+            city = input('Please select a city to explore: (chicago, new york city, washington) \n').lower()
             if city in ['chicago', 'new york city', 'washington']: break
         except:
             print('Please enter a valid city: chicago, new york city, washington \n')
         continue
-    
+
     # get user filter options
     while True:
         try:
-            filt = input('\n Would you like to filter the data by day, month or both? Type "none" for no filter. \n').lower() 
+            filt = input('\n Would you like to filter the data by day, month or both? Type "none" for no filter. \n').lower()
             if filt in ['day', 'month', 'both', 'none']: break
-        except: 
+        except:
             print('Please enter a valid response: (day, month, both, none) \n')
         continue
-    
+
     if filt == 'day':
           while True:
                 # get user input for day of week (all, monday, tuesday, ... sunday)
                 try:
-                    day = input('Please selected your prefered day: (monday, tuesday, ... sunday) \n').lower() 
+                    day = input('Please selected your prefered day: (monday, tuesday, ... sunday) \n').lower()
                     month = 'all'
                     if day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']: break
                 except:
                     print('Please enter a valid day: (monday, tuesday, ... sunday) \n')
                 continue
-    
+
     elif filt == 'month':
             while True:
                 # get user input for month (all, january, february, ... , june)
                 try:
-                    month = input('Please selected your prefered month: (january, february, ... , june) \n').lower() 
+                    month = input('Please selected your prefered month: (january, february, ... , june) \n').lower()
                     day = 'all'
                     if month in ['january', 'february', 'march', 'april', 'may', 'june']: break
                 except:
                     print('Please enter a valid month: (january, february, ... , june) \n')
                 continue
-        
+
     elif filt == 'both':
             while True:
                 # get user input for month (all, january, february, ... , june)
                 try:
-                    month = input('Please selected your prefered month: (january, february, ... , june) \n').lower() 
+                    month = input('Please selected your prefered month: (january, february, ... , june) \n').lower()
                     if month in ['january', 'february', 'march', 'april', 'may', 'june']: break
                 except:
                     print('Please enter a valid month: (january, february, ... , june) \n')
                 continue
-    
+
             while True:
           # get user input for day of week (all, monday, tuesday, ... sunday)
                 try:
-                   day = input('Please selected your prefered day: (monday, tuesday, ... sunday) \n').lower() 
+                   day = input('Please selected your prefered day: (monday, tuesday, ... sunday) \n').lower()
                    if day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']: break
                 except:
                  print('Please enter a valid day: (monday, tuesday, ... sunday) \n')
@@ -100,10 +100,10 @@ def load_data(city, month, day):
 
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     # extract hour Start Time to create an hour column
     df['hour'] = df['Start Time'].dt.hour
-    
+
     # extract month and day of week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
     df['day'] = df['Start Time'].dt.weekday_name
@@ -114,7 +114,7 @@ def load_data(city, month, day):
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
-    
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -122,7 +122,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day'] == day.title()]
-    
+
     return df
 
 
@@ -155,7 +155,7 @@ def station_stats(df):
 
     # display most commonly used start station
     print('The most commonly used start station: {}'.format(df['Start Station'].value_counts().idxmax()))
-    
+
     # display most commonly used end station
     print('The most commonly used end station: {}'.format(df['End Station'].value_counts().idxmax()))
 
@@ -163,7 +163,7 @@ def station_stats(df):
     station_pairs = df['Start Station'] + "_" + df['End Station']
     popular_pair = station_pairs.value_counts().idxmax()
     print('The most frequent trip is from \n{} \nto \n{}.'.format(popular_pair.split("_")[0], popular_pair.split("_")[1]))
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -200,20 +200,21 @@ def user_stats(df):
         gender_types = df['Gender'].value_counts()
         print('\nDistribution of gender:\n')
         print(gender_types)
-    
+
     # Display earliest, most recent, and most common year of birth
-    if 'Birth Year' in df.columns: 
+    if 'Birth Year' in df.columns:
         print('\nThe earliest year of birth was {}'.format(df['Birth Year'].min()))
         print('\nThe most recent year of birth was {}.'.format(df['Birth Year'].max()))
         print('\nThe most common year of birth was {}.'.format(df['Birth Year'].mode()[0]))
-        
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 def raw_data(df):
+        """Displays raw data on bikeshare upon users request."""
     inp = input('Do you want to see the raw data? Yes or No \n')
     row_num = 0
-    
+
     while True:
         if inp.lower() != 'no':
             print(df.iloc[row_num: row_num + 5])
@@ -221,7 +222,7 @@ def raw_data(df):
             inp = input('\nWould you like to see more raw data? Yes or No \n')
         else:
             break
-        
+
 def main():
     while True:
         city, month, day = get_filters()
