@@ -28,13 +28,13 @@ def get_filters():
     # get user filter options
     while True:
         try:
-            filt = input('\n Would you like to filter the data by day, month or both? Type "none" for no filter. \n').lower()
-            if filt in ['day', 'month', 'both', 'none']: break
+            filter_opts = input('\n Would you like to filter the data by day, month or both? Type "none" for no filter. \n').lower()
+            if filter_opts in ['day', 'month', 'both', 'none']: break
         except:
             print('Please enter a valid response: (day, month, both, none) \n')
         continue
 
-    if filt == 'day':
+    if filter_opts == 'day':
           while True:
                 # get user input for day of week (all, monday, tuesday, ... sunday)
                 try:
@@ -45,7 +45,7 @@ def get_filters():
                     print('Please enter a valid day: (monday, tuesday, ... sunday) \n')
                 continue
 
-    elif filt == 'month':
+    elif filter_opts == 'month':
             while True:
                 # get user input for month (all, january, february, ... , june)
                 try:
@@ -56,7 +56,7 @@ def get_filters():
                     print('Please enter a valid month: (january, february, ... , june) \n')
                 continue
 
-    elif filt == 'both':
+    elif filter_opts == 'both':
             while True:
                 # get user input for month (all, january, february, ... , june)
                 try:
