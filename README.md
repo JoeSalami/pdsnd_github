@@ -8,6 +8,12 @@ Explore US Bikeshare Data
 In this project, we use Python to explore data related to bike share systems for three major
 cities in the United States-Chicago, New York City, and Washington. The python code, imports the data and answers interesting questions about it by computing descriptive statistics in an interactive environment.
 
+The program computes interesting statistics on:
+Popular times to travel: most common travel month, day of week and hour of day
+Popular stations and trip: most common start and end station
+Trip duration: total and average travel time
+User info: count of each user type, counts of gender
+
 ### Files used
 Randomly selected data for the first six months of 2017 are provided for all three cities. All three of the data files contain the same core six (6) columns:
 Start Time (e.g., 2017-01-01 00:07:57)
